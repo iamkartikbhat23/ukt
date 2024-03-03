@@ -1,0 +1,152 @@
+<script setup>
+    definePageMeta({
+        layout:'default'
+    }) ;
+
+    const { data } = await useFetch('/api/dashboard') ;
+    
+</script>
+<template>
+    <Head>
+        <Title>Ukt | Dashboard</Title>
+        <Meta name="ogTitle" :content="Ukt | News"></Meta>
+        <Meta name="description" content="Ukt Recent Stories"></Meta>
+        <Meta name="ogDescription" content="Ukt Recent Stories"></Meta>
+        <Meta name="keywords" content="Ukt stories, card stories, datewise stories, new stories, trending stories, trending news, sliding cards"></Meta>
+    </Head>
+    <div class="w-full">
+        <div>
+            <div class="flex items-center px-1 md:px-0" data-aos="fade-up">
+                <h1 class="w-10/12 text-xl font-semibold py-5">Recent Stories</h1>
+                <div class="w-2/12 ">
+                    <NuxtLink to="/news" class="text-md md:text-lg text-blue-700 font-semibold flex gap-1 justify-end items-center">
+                        <div class="hidden md:block">View all</div>
+                        <Icon name="mdi:chevron-double-right" color="#0ea5e9" class="text-2xl"/>
+                    </NuxtLink>
+                </div>
+            </div>
+           
+            <Swiper :modules="[SwiperNavigation]"
+                    :slidesPerView="1.5"
+                    :spaceBetween="10"
+                    :pagination="{
+                        clickable: true,
+                    }"
+                    :breakpoints="{
+                        '640': {
+                            slidesPerView: 1.5,
+                            spaceBetween: 20,
+                        },
+                        '768': {
+                            slidesPerView: 3.5,
+                            spaceBetween: 25,
+                        },
+                        '1024': {
+                            slidesPerView: 4.5,
+                            spaceBetween: 30,
+                        },
+                    }">
+                <SwiperSlide v-for="info in data?.news" class="px-1 md:px-0">
+                    <div class="flex flex-col border border-blue-100 rounded-lg ">
+                        <NuxtLink :to="`/news/${info.slug}`">
+                            <img :src="info.main_image" alt="News card's main image" class="rounded-md h-fit w-full hover:rotate-[0.5deg] hover:shadow-md"/>
+                            <div class="p-1">
+                                <div class="text-lg font-semibold line-clamp-2 h-14">{{ info.title }}</div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex gap-2 items-center text-neutral-600 text-sm">
+                                        <Icon name="uil:eye" color="#525252" />
+                                        <div>{{ info.total_views }}</div>
+                                    </div>
+                                    <div class="text-sm text-blue-700 border border-blue-600 rounded-lg px-1">{{ info.category_en }}</div>
+                                </div>
+                            </div>
+                        </NuxtLink>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+        </div>
+        <h2 class="w-10/12 text-2xl font-bold pt-12 px-1 md:px-0">Popular Categories</h2>
+        <template v-for="category in data?.categories" class="px-1 md:px-0" >
+            <div class="flex items-center my-3 px-1 md:px-0">
+                <h2 class="w-10/12 text-xl font-semibold py-5">{{ category.eng_name }}</h2>
+                <div class="w-2/12 text-md md:text-lg text-blue-700 font-semibold   ">
+                    <NuxtLink :to="`/news/category/${category.slug}`" class="flex gap-1 justify-end items-center">
+                        <div class="hidden md:block">View all</div>
+                        <Icon name="mdi:chevron-double-right" color="#0ea5e9" class="text-2xl"/>
+                    </NuxtLink>
+                </div>
+            </div>
+            <Swiper :modules="[SwiperNavigation]"
+                    :slidesPerView="1.5"
+                    :breakpoints="{
+                        '640': {
+                            slidesPerView: 1.5,
+                            spaceBetween: 20,
+                        },
+                        '768': {
+                            slidesPerView: 3.5,
+                            spaceBetween: 25,
+                        },
+                        '1024': {
+                            slidesPerView: 4.5,
+                            spaceBetween: 30,
+                        },
+                    }" data-aos="fade-up" data-aos-duration="1000">
+                <SwiperSlide v-for="info in category.news" class="px-1 md:px-0">
+                    <div class="flex flex-col border border-blue-100  rounded-lg">
+                        <NuxtLink :to="`/news/${info.slug}`">
+                            <nuxt-img :src="info.main_image" format="webp" quality="70" placeholder="/default.png" loading="lazy" alt="News card's main image" class="rounded-md h-fit w-full hover:rotate-[0.5deg]"/>
+                            <!-- <img :src="info.main_image" onload="'~/assets/images/defaultimage.png'" alt="News card's main image" class="rounded-md h-fit w-full hover:rotate-[0.5deg]"/> -->
+                            <div class="p-1">
+                                <div class="text-lg font-semibold line-clamp-2 h-14">{{ info.title }}</div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex gap-2 items-center text-neutral-600 text-sm">
+                                        <Icon name="uil:eye" color="#525252" />
+                                        <div>{{ info.total_views }}</div>
+                                    </div>
+                                    <div class="text-sm text-blue-700 border border-blue-600 rounded-lg px-1">{{ info.category_en }}</div>
+                                </div>
+                            </div>
+                        </NuxtLink>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+            <hr class="my-4" />
+        </template>
+        <div class="my-2 md:py-10 flex justify-center gap-5 md:px-1 px-4 flex-wrap">
+            <div data-aos="flip-up" class=" cursor-pointer max-w-max px-3 py-1 border border-sky-700 text-sky-600 rounded-full hover:bg-sky-600 hover:text-white text-xl" v-for="categoryInfo in data?.popularCategories">
+                <NuxtLink :to="`/news/category/${categoryInfo.slug}`">
+                    {{ categoryInfo.eng_name }} 
+                </NuxtLink>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+  
+  // Import Swiper styles
+  import 'swiper/css';
+
+  import 'swiper/css/pagination';
+
+
+  // import required modules
+  import { Pagination } from 'swiper/modules';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      return {
+        modules: [Pagination],
+      };
+    },
+  };
+</script>
+<style scoped>
+
+</style>

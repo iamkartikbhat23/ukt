@@ -1,0 +1,169 @@
+<script setup>
+    definePageMeta({
+        layout:'default'
+    }) ;
+
+    const { data } = await useFetch('/api/dashboard') ;
+    
+</script>
+<template>
+    <div class="w-full">
+        <div>
+            <div class="flex justify-between">
+                <h1 class="text-2xl font-semibold py-5 px-1 md:px-0">Recent Stories</h1>
+                <div class="flex gap-2 items-center">
+                    <div class="hidden md:block">View all</div>
+                    <Icon name="mdi:chevron-double-right" color="#0ea5e9" class="text-2xl"/>
+                </div>
+            </div>
+            <h2 class="w-10/12 text-xl font-semibold py-5">{{ category.eng_name }}</h2>
+                <div class="w-2/12 text-md md:text-lg text-blue-700 font-semibold flex gap-1 justify-end items-center">
+                    <div class="hidden md:block">View all</div>
+                <Icon name="mdi:chevron-double-right" color="#0ea5e9" class="text-2xl"/>
+            </div>
+            <Swiper :modules="[SwiperNavigation]"
+                    :slidesPerView="1.5"
+                    :spaceBetween="10"
+                    :pagination="{
+                        clickable: true,
+                    }"
+                    :breakpoints="{
+                        '640': {
+                            slidesPerView: 1.5,
+                            spaceBetween: 20,
+                        },
+                        '768': {
+                            slidesPerView: 3.5,
+                            spaceBetween: 25,
+                        },
+                        '1024': {
+                            slidesPerView: 4.5,
+                            spaceBetween: 30,
+                        },
+                    }">
+                <SwiperSlide v-for="info in data?.news" class="px-1 md:px-0">
+                    <div class="flex flex-col border border-blue-100 rounded-lg ">
+                        <NuxtLink :to="`/news/${info.slug}`">
+                            <img :src="info.main_image" onload="'~/assets/images/defaultimage.png'" alt="News card's main image" class="rounded-md h-fit w-full hover:rotate-[0.5deg] hover:shadow-md"/>
+                            <div class="p-1">
+                                <div class="text-lg font-semibold line-clamp-2 h-14">{{ info.title }}</div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex gap-2 items-center text-neutral-600 text-sm">
+                                        <Icon name="uil:eye" color="#525252" />
+                                        <div>{{ info.total_views }}</div>
+                                    </div>
+                                    <div class="text-sm text-blue-700 border border-blue-600 rounded-lg px-1">{{ info.category_en }}</div>
+                                </div>
+                            </div>
+                        </NuxtLink>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+        </div>
+        <!-- <swiper
+            :slidesPerView="1"
+            :spaceBetween="10"
+            :pagination="{
+            clickable: true,
+            }"
+            :breakpoints="{
+                '640': {
+                    slidesPerView: 1.5,
+                    spaceBetween: 20,
+                },
+                '768': {
+                    slidesPerView: 3.5,
+                    spaceBetween: 40,
+                },
+                '1024': {
+                    slidesPerView: 4.5,
+                    spaceBetween: 50,
+                },
+            }"
+            :modules="modules"
+            class="mySwiper"
+        >
+            <swiper-slide  v-for="info in data.data.news">
+                
+            </swiper-slide>
+        </swiper> -->
+        <!-- <div class="grid grid-cols-5 gap-5">
+            <div v-for="info in data.data.news" >
+                <img :src="info.main_image" class="rounded-md h-fit w-full"/>
+            </div>
+        </div> -->
+        <h2 class="w-10/12 text-2xl font-bold pt-12 px-1 md:px-0">Popular Categories</h2>
+        <template v-for="category in data?.categories" class="px-1 md:px-0">
+            <div class="flex justify-between items-center my-3 px-1 md:px-0">
+                <h2 class="w-10/12 text-xl font-semibold py-5">{{ category.eng_name }}</h2>
+                <div class="w-2/12 text-md md:text-lg text-blue-700 font-semibold flex gap-1 justify-end items-center">
+                    <div class="hidden md:block">View all</div>
+                    <Icon name="mdi:chevron-double-right" color="#0ea5e9" class="text-2xl"/>
+                </div>
+            </div>
+            <Swiper :modules="[SwiperNavigation]"
+                    :slidesPerView="1.5"
+                    :breakpoints="{
+                        '640': {
+                            slidesPerView: 1.5,
+                            spaceBetween: 20,
+                        },
+                        '768': {
+                            slidesPerView: 3.5,
+                            spaceBetween: 25,
+                        },
+                        '1024': {
+                            slidesPerView: 4.5,
+                            spaceBetween: 30,
+                        },
+                    }" >
+                <SwiperSlide v-for="info in category.news" class="px-1 md:px-0">
+                    <div class="flex flex-col border border-blue-100  rounded-lg">
+                        <NuxtLink :to="`/news/${info.slug}`">
+                            <img :src="info.main_image" onload="'~/assets/images/defaultimage.png'" alt="News card's main image" class="rounded-md h-fit w-full hover:rotate-[0.5deg]"/>
+                            <div class="p-1">
+                                <div class="text-lg font-semibold line-clamp-2 h-14">{{ info.title }}</div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex gap-2 items-center text-neutral-600 text-sm">
+                                        <Icon name="uil:eye" color="#525252" />
+                                        <div>{{ info.total_views }}</div>
+                                    </div>
+                                    <div class="text-sm text-blue-700 border border-blue-600 rounded-lg px-1">{{ info.category_en }}</div>
+                                </div>
+                            </div>
+                        </NuxtLink>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+            <hr class="my-4" />
+        </template>
+    </div>
+</template>
+
+<script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+  
+  // Import Swiper styles
+  import 'swiper/css';
+
+  import 'swiper/css/pagination';
+
+
+  // import required modules
+  import { Pagination } from 'swiper/modules';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      return {
+        modules: [Pagination],
+      };
+    },
+  };
+</script>
+<style scoped>
+
+</style>

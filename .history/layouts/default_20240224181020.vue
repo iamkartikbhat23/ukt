@@ -1,0 +1,31 @@
+<template>
+    <div class="w-full min-h-screen flex flex-col">
+        <header class="shadow-md shadow-green-200">
+            <nav>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </nav>
+        </header>
+        <main>
+            <slot />
+        </main>
+        <footer>
+            <nav>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </nav>
+        </footer>
+    </div>
+</template>
+
+<script>
+    export default {
+        
+    }
+</script>
+
+<style scoped>
+
+</style>

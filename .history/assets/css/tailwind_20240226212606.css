@@ -1,0 +1,28 @@
+@tailwind base ;
+@tailwind components ;
+@tailwind utilities ;
+
+body {
+    @apply bg-green-50 ;
+}
+
+@layer components {
+    
+}
+
+@keyframes example {
+    0,100% {
+        border-color: #cbd5e1;
+        color:#cbd5e1;
+    }
+    to {
+        border-color: #4338ca;
+        color:#4338ca;
+    }
+}
+
+#exdiv {
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}

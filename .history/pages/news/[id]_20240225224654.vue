@@ -1,0 +1,39 @@
+<script setup>
+    const { id } = useRoute().params ;
+
+    definePageMeta({
+        layout:'news'
+    }) ;
+
+    const { data } = await useFetch(`/api/news/${id}`) ;
+    
+</script>
+<template>
+    <div>
+        <p>News {{ data.data }}</p>
+        <swiper
+            :scrollbar="{
+            hide: true,
+            }"
+            :modules="modules"
+            class="mySwiper"
+        >
+            <swiper-slide>
+                <div>
+                    <img :src="datadata.data.main_image" class="rounded-md h-fit w-full hover:rotate-[0.5deg]"/>
+                </div>
+            </swiper-slide>
+            
+            <swiper-slide v-for="info in data.data.news">
+            
+            </swiper-slide>
+        </swiper>
+    </div>
+</template>
+
+<script>
+
+</script>
+<style scoped>
+
+</style>

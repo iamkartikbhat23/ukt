@@ -1,0 +1,22 @@
+@tailwind base ;
+@tailwind components ;
+@tailwind utilities ;
+
+body {
+    @apply bg-green-50 ;
+}
+
+@layer components {
+    
+}
+
+@keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
+#exdiv {
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: 3;
+}
