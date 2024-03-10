@@ -22,7 +22,6 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     apiURL : "https://pravi.kartikbhat.tech/api/",
-    apiKey: 'sdfasdf'
   },
   app : {
     head : {

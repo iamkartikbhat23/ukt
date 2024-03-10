@@ -14,14 +14,19 @@
             </div>
             <div class="py-4 md:py-10 flex flex-col items-center gap-2 p-2">
                 <img src="~/assets/images/logo.png" alt="Main logo" class="w-24 h-16 my-2" />
-                <div @click="redirectPage('dashboard')" class="cursor-pointer w-full border border-sky-800 px-4 py-3  rounded bg-gray-200 hover:bg-zinc-200">
+                <div @click="redirectPage('dashboard')" class="flex items-center gap-1 cursor-pointer w-full border border-sky-800 px-4 py-3  rounded bg-gray-200 hover:bg-zinc-200">
+                    <Icon name="material-symbols:dashboard" class="text-2xl"/>
                     Dashboard
                 </div>
-                <div @click="redirectPage('categories')" class="cursor-pointer w-full border border-sky-800 px-4 py-3  rounded bg-gray-200 hover:bg-zinc-200">
+                <div @click="redirectPage('categories')" class="flex items-center gap-1 cursor-pointer w-full border border-sky-800 px-4 py-3  rounded bg-gray-200 hover:bg-zinc-200">
+                    <Icon name="material-symbols:category" class="text-2xl"/>
                     Categories
                 </div>
                 <div class="w-full border border-sky-800  rounded cursor-pointer  hover:bg-zinc-200">
-                    <div class="bg-gray-200 px-4 py-3 w-full" @click="toggleCalender">Calender</div>
+                    <div class="flex items-center gap-1 bg-gray-200 px-4 py-3 w-full" @click="toggleCalender">
+                        <Icon name="material-symbols:calendar-month" class="text-2xl"/>
+                        Calender
+                    </div>
                     <div  id="calender" class=" w-full hidden flex justify-center items-center p-3 -translate-y-full duration-500 ease-out transition-all">
                         <div class="flex flex-col gap-3">
                             <div class="text-lg font-semibold">Choose a Date</div>
@@ -29,15 +34,16 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="!$pwa?.isPWAInstalled" class="absolute bottom-0  w-full py-3  rounded cursor-pointer bg-purple-900 text-white">
-                    <button @click="$pwa.install()" class="w-full text-center m-1">
+                <div v-if="!$pwa?.isPWAInstalled" class="absolute bottom-0  w-full p-3  rounded">
+                    <button @click="$pwa.install()" class="flex justify-center items-center gap-1 bg-blue-700 text-white cursor-pointer w-full border border-sky-800 px-4 py-3  rounded">
+                        <Icon name="material-symbols:download" class="text-2xl cursor-pointer white" />
                         Install
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="w-full min-h-screen flex flex-col bg-sky-50 select-none">
+    <div class="w-full min-h-screen flex flex-col bg-slate-50 select-none">
         <header class="shadow-md shadow-sky-50 container mx-auto">
             <div class="flex justify-between items-center">
                 <div></div>
