@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    apiURL : process.env.API_URL,
+    apiURL : "https://pravi.kartikbhat.tech/api/",
     apiKey: 'sdfasdf'
   },
   app : {

@@ -8,7 +8,7 @@
     </Head>
     <div class="w-full">
         <h1 class="text-2xl text-gray-800 font-semibold p-2">Categories</h1>
-        <div class="my-2 md:py-10 flex justify-center gap-5 md:px-1  w-full md:w-auto flex-wrap">
+        <div v-if="data.length>0" class="my-2 md:py-10 flex justify-center gap-5 md:px-1  w-full md:w-auto flex-wrap">
             <div data-aos="flip-up" class=" cursor-pointer max-w-max px-7 py-2 border border-sky-700 text-sky-600 rounded-full hover:bg-sky-600 hover:text-white text-xl" 
                         v-for="categoryInfo in data">
                 <NuxtLink :to="`/news/category/${categoryInfo.slug}`" class="flex gap-4">
