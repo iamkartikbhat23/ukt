@@ -2,6 +2,8 @@
 
 Developed using NUXT 3 - Front end application that calls API to fetch data
 
+Preview it [Here](https://ukt.netlify.com)
+
 ## Setup
 
 Make sure to install the dependencies:
