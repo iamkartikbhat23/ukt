@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# UKT - (U Know This!) - a Web Stories App 
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Developed using NUXT 3 - Front end application that calls API to fetch data
 
 ## Setup
 
