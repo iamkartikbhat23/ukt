@@ -11,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'fade-up': 'fadeUp 1s ease-in-out',
-        'blurry': 'blurry 0.75s ease-in-out',
+        'fade-up': 'fadeUp 0.75s ease-in-out',
+        'blurry': 'blurry 0.5s ease-in',
 			},
 
 			keyframes: {

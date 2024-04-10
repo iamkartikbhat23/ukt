@@ -7,19 +7,15 @@
 
     const { data  } = await useFetch(`/api/news/${id}`) ;
 
+    const shareNews = () => {
+        navigator.share({
+            title: data.value.news.title,
+            text: 'UKT : WebStories',
+            url: `/news/${data.value.news.slug}`
+        })
+    } ;
 
-    // console.log(data.data.news.title) ;
-    // useSeoMeta({
-    //     title: "News sdsdfsd",
-    //     // ogTitle:data.news.title,
-    //     // description: data.news.description,
-    //     // ogDescription: data.news.description,
-    //     // ogImage: data.news.main_image,
-    //     // ogUrl: '',
-    //     // ogType:'article',
-    //     // keywords: data.news.hashtags,
-    //     // twitterCard: 'summary_large_image',
-    // })
+
     
 </script>
 <template>
@@ -80,6 +76,11 @@
                 <div class="relative">
                     <div class="absolute right-0 top-0 text-gray-800 text-sm p-1" v-if="info.source!=null">
                         source : {{ info.source }}
+                    </div>
+                    <div @click="shareNews" class="absolute left-1 top-1 bg-black rounded-full p-1.5 animate-pulse cursor-pointer" >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 text-white -rotate-45">
+                            <path d="M2.87 2.298a.75.75 0 0 0-.812 1.021L3.39 6.624a1 1 0 0 0 .928.626H8.25a.75.75 0 0 1 0 1.5H4.318a1 1 0 0 0-.927.626l-1.333 3.305a.75.75 0 0 0 .811 1.022 24.89 24.89 0 0 0 11.668-5.115.75.75 0 0 0 0-1.175A24.89 24.89 0 0 0 2.869 2.298Z" />
+                        </svg>
                     </div>
                     <img :src="info.image" :class="isVisible ? 'animate-blurry' : ''" class="object-cover rounded-sm h-screen w-full"/>
                     <div :class="isVisible ? 'animate-fade-up' : ''"  class="absolute bottom-0 left-0 h-32 rounded-t-2xl bg-zinc-800/70 w-full text-center ">
